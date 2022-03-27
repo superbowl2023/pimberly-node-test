@@ -5,6 +5,7 @@ const results = []
 let processedResults = []
 let dupContainer = []
 let goodRow = {}
+let numberOfIterations = -1;
 
 duplicateCounter = 0
 emptyCounter = 0
@@ -55,9 +56,11 @@ fs.createReadStream('testfile.csv')
             processedResults.splice(dupObject, 1)
         }
         console.log(processedResults);
-        console.log(`Number of products created:  ${processedResults.length}`)
-        console.log(`Number of products unchanged:  ${0}`)
-        console.log(`Number of rows skipped:  ${dupContainer.length * 2 + emptyCounter}`) // we multiply by 2 coz duplicates
 
-        
+        const skippedCounter = (dupContainer.length * 2) + emptyCounter // we multiply by 2 bcoz of duplicates
+        const createdCounter = processedResults.length
+        const unchangedCounter = createdCounter ? 0 : createdCounter
+        console.log(`Number of products created:  ${createdCounter}`)
+        console.log(`Number of products unchanged:  ${unchangedCounter}`)
+        console.log(`Number of rows skipped:  ${skippedCounter}`) 
   });
