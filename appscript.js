@@ -3,10 +3,14 @@ const fs = require('fs');
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const results = []
 let processedResults = []
+let dupContainer = []
 let goodRow = {}
 
+duplicateCounter = 0
+emptyCounter = 0
+
 fs.createReadStream('testfile.csv')
-  .pipe(csv(["SKU", "Colour", "Size"]))
+  .pipe(csv())
   .on('data', (data) => {
         results.push(data)
   })
@@ -21,7 +25,8 @@ fs.createReadStream('testfile.csv')
             for(let i = 0; i< keys.length; i++) {
                 
                 if(row[keys[i]] === '' || row[keys[i]] === null) {
-                    console.log ('row has empty')
+                    emptyCounter++
+                    console.log ('row skipped because has empty cell')
                     break;
                 }
 
@@ -31,14 +36,23 @@ fs.createReadStream('testfile.csv')
                     if(processedResults.length > 0) {
                         for(const itemObject of processedResults) {
                             if(itemObject[keys[0]] === row[keys[0]]) {
-                                processedResults.splice(itemObject, 1)
+                                duplicateCounter++
+                                processedResults.splice(itemObject, 1) // remove duplicate from proccessed results
+                                dupContainer.push(itemObject)
+                                console.log ('row skipped because duplicated') 
                             }
+    
                         }
                     }
                     processedResults.push(row)
                 
                 }
             }
+        }
+
+        // fix bug where the second copy of duplicate object was still found into processed results
+        for(const dupObject of dupContainer) {
+            processedResults.splice(dupObject, 1)
         }
         console.log(processedResults);
 
