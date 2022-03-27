@@ -55,6 +55,9 @@ fs.createReadStream('testfile.csv')
             processedResults.splice(dupObject, 1)
         }
         console.log(processedResults);
+        console.log(`Number of products created:  ${processedResults.length}`)
+        console.log(`Number of products unchanged:  ${0}`)
+        console.log(`Number of rows skipped:  ${dupContainer.length * 2 + emptyCounter}`) // we multiply by 2 coz duplicates
 
         
   });
