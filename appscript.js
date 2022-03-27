@@ -1,10 +1,12 @@
 const csv = require('csv-parser');
 const fs = require('fs');
+const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const results = []
 let processedResults = []
 let goodRow = {}
+
 fs.createReadStream('testfile.csv')
-  .pipe(csv())
+  .pipe(csv(["SKU", "Colour", "Size"]))
   .on('data', (data) => {
         results.push(data)
   })
@@ -37,8 +39,8 @@ fs.createReadStream('testfile.csv')
                 
                 }
             }
-            //processedResults.splice(row, 1)
         }
-        //processedResults.splice(row)
         console.log(processedResults);
+
+        
   });
