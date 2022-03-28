@@ -51,15 +51,20 @@ fs.createReadStream('testfile.csv')
             }
         }
 
-        // fix bug where the second copy of duplicate object was still found into processed results
+        // fix bug where the second copy of duplicate object was still found in processed results
         for(const dupObject of dupContainer) {
             processedResults.splice(dupObject, 1)
         }
+
+        const processedResultsToJson = JSON.stringify(processedResults); // convert to json
+        console.log(processedResultsToJson, ": Our json object")
+        
         console.log(processedResults);
 
         const skippedCounter = (dupContainer.length * 2) + emptyCounter // we multiply by 2 bcoz of duplicates
         const createdCounter = processedResults.length
         const unchangedCounter = createdCounter ? 0 : createdCounter
+        
         console.log(`Number of products created:  ${createdCounter}`)
         console.log(`Number of products unchanged:  ${unchangedCounter}`)
         console.log(`Number of rows skipped:  ${skippedCounter}`) 
