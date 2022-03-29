@@ -12,7 +12,7 @@ router.get('/:size', (req, res) => {
     //get the filter from request parameter
 
     let size = req.params
-    let filter = size.size
+    let filter = (size.size).toUpperCase()
     //extract data from file
     try {
         fs.createReadStream('testfile.csv')
@@ -27,7 +27,7 @@ router.get('/:size', (req, res) => {
     }
     
     catch(error) {
-        console.log(console.error.message)
+        console.log(error.message)
     }
     
     //pass in the filter
