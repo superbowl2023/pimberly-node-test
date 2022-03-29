@@ -2,29 +2,16 @@ const express = require('express');
 const csv = require('csv-parser');
 const fs = require('fs');
 const bodyparser = require('body-parser');
+const colourRoutes = require('./routes/colour-api.js')
+const sizeRoutes = require('./routes/size-api.js')
 let results = []
-
-//extract data from file
-try {
-    fs.createReadStream('testfile.csv')
-    .pipe(csv())
-    .on('data', (data) => {
-    results.push(data);
-    })
-    .on('end', ()=> {
-        //console.log('this has ended')
-    })
-}
-
-catch(error) {
-    console.log(console.error.message)
-}
 
 const app = express();
 const PORT = 5000;
 
 app.use(bodyparser.json());
-
+app.use('/colour', colourRoutes)
+app.use('/size', sizeRoutes)
 
 //filter by colour api
 app.get('/:colour', (req, res) => {
@@ -49,3 +36,5 @@ app.get('/:size', (req, res) => {
 
 
 app.listen(PORT, () => console.log(`Server running on port: http://localhost:${PORT}`))
+
+module.exports = results
