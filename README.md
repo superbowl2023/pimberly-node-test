@@ -10,10 +10,10 @@ node appscript.js
 \*\*\* for below make sure server is running on port 5000 i.e: npm start
 
 2.To run the api that filters by colour:
-run a 'Get' to url: localhost:5000/colorvalue e.g localhost/5000/C4
+run a 'Get' to url: http://localhost:5000/colour/"filter" e.g localhost/5000/colour/C1
 
 3. To run the api that filters by size:
-   run a 'Get' to url: localhost:5000/sizevalue e.g localhost/5000/S9
+   run a 'Get' to url: localhost:5000/size/"filter" e.g localhost/5000/size/S9
 
 IMPROVEMENTS:
 
