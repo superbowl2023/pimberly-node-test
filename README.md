@@ -19,6 +19,8 @@ IMPROVEMENTS:
 
 1.) Could put more try/catch and logging to handle errors
 2.) Could also implement midware authetication and authorisation
+2.) A DB would have been better to use right the filter queries with much better results
 
-PROBLEMS:
-Initial router i created errors with a bug saying: router expects a function but instead object is parsed
+PROBLEMS
+1.) Had a bug in the script where a duplicate still shows up in the results
+2.) Had a heap error (solved by using keyword break;)
