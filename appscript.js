@@ -69,3 +69,5 @@ fs.createReadStream('testfile.csv')
         console.log(`Number of products unchanged:  ${unchangedCounter}`)
         console.log(`Number of rows skipped:  ${skippedCounter}`) 
   });
+
+  
