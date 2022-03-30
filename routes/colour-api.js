@@ -4,6 +4,22 @@ const csv = require('csv-parser');
 const fs = require('fs');
 let results = []
 
+try {
+    fs.createReadStream('testfile.csv')
+    .pipe(csv())
+    .on('data', (data) => {
+    results.push(data);
+    JSON.stringify(results)
+    })
+    .on('end', ()=> {
+        //console.log('this has ended')
+    })
+}
+
+catch(error) {
+    console.log(error.message)
+}
+
 
 
 router.get('/:size', (req, res) => {
@@ -14,21 +30,6 @@ router.get('/:size', (req, res) => {
     let size = req.params
     let filter = (size.size).toUpperCase()
     //extract data from file
-    try {
-        fs.createReadStream('testfile.csv')
-        .pipe(csv())
-        .on('data', (data) => {
-        results.push(data);
-        JSON.stringify(results)
-        })
-        .on('end', ()=> {
-            //console.log('this has ended')
-        })
-    }
-    
-    catch(error) {
-        console.log(error.message)
-    }
     
     //pass in the filter
     for(const result of results) {
